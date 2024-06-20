@@ -1,4 +1,4 @@
-import moviePoster from '../../../assets/images/main-page/no-poster-found.jpg';
+import moviePoster from '../../../assets/images/test-imgs/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg';
 
 const FrontOfCard = () => {
     return (

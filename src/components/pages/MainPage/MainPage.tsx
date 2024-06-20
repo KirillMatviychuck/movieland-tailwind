@@ -4,7 +4,6 @@ const MainPage = () => {
     return (
         <div className='mx-40 my-6 flex justify-center items-center flex-wrap gap-10'>
             <MovieCard />
-            {/* <MovieCard />
             <MovieCard />
             <MovieCard />
             <MovieCard />
@@ -12,7 +11,8 @@ const MainPage = () => {
             <MovieCard />
             <MovieCard />
             <MovieCard />
-            <MovieCard /> */}
+            <MovieCard />
+            <MovieCard />
         </div>
     )
 }
