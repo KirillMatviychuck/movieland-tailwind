@@ -3,7 +3,7 @@ import moviePoster from '../../../assets/images/test-imgs/z1p34vh7dEOnLDmyCrlUVL
 const FrontOfCard = () => {
     return (
         <div className='absolute backface-hidden rounded-3xl w-full h-full'>
-            <img className='rounded-3xl' src={moviePoster} alt="movie poster" />
+            <img className='rounded-3xl h-full w-full' src={moviePoster} alt="movie poster" />
         </div>
     )
 }
