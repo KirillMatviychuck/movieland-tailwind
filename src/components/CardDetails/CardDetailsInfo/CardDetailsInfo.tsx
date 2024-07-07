@@ -6,6 +6,12 @@ import { correctImgPath, correctRating, correctReleaseDate } from '../../../util
 
 const CardDetailsInfo = () => {
     const { poster_path, title, vote_average, tagline, overview, genres, release_date, revenue, runtime } = useAppSelector(state => state.movieDetailsSlice)
+    const fixDuration = (duration: number) => {
+        const hours = Math.floor(duration / 60)
+        const minutes = duration - (hours * 60)
+
+        return `${hours}h ${minutes}m`
+    }
     return (
         <div className='absolute flex justify-center items-center h-full w-full'>
             <div className='w-4/6 h-4/6 flex'>
@@ -32,7 +38,7 @@ const CardDetailsInfo = () => {
                         </div>
                         <div className='flex justify-center items-center'>
                             <img src={durationImg} className='h-8' alt="duration time" />
-                            <span className='ml-2'>Duration: {runtime}</span>
+                            <span className='ml-2'>Duration: {fixDuration(runtime)}</span>
                         </div>
                         <div className='flex justify-center items-center'>
                             <img src={revenueImg} className='h-8' alt="revenue" />
