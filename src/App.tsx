@@ -1,10 +1,18 @@
-import Header from "./components/Header/Header"
-import MainPage from "./components/pages/MainPage/MainPage"
-import NavigationBar from "./components/NavigationBar/NavigationBar"
+import { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
+import Header from "./components/Header/Header"
+import NavigationBar from "./components/NavigationBar/NavigationBar"
 import CardDetailsPage from "./components/pages/CardDetailsPage/CardDetailsPage"
+import MainPage from "./components/pages/MainPage/MainPage"
+import { useAppDispatch } from "./redux/hooks"
+import { getMovieList } from "./redux/slices/movie-list/movie-list-slice"
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getMovieList({}))
+  }, [dispatch])
 
   return (
     <div className=''>

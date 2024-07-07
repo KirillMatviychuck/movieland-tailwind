@@ -1,8 +1,11 @@
-import bgPoster from '../../../assets/images/test-imgs/terminator.jpg';
+import { useAppSelector } from "../../../redux/hooks";
+import { getBackdropURL } from "../../../utils/utils";
 
 const CardDetailsBackground = () => {
+    const { backdrop_path } = useAppSelector(state => state.movieDetailsSlice)
+
     return (
-        <div className='absolute h-full w-full bg-cover bg-top opacity-80' style={{ backgroundImage: `url(${bgPoster})` }}>
+        <div className='absolute h-full w-full bg-cover bg-top opacity-80' style={{ backgroundImage: `url(${getBackdropURL(backdrop_path)})` }}>
         </div>
     )
 }
