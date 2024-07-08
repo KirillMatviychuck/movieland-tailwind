@@ -2,6 +2,12 @@ import { GetMovieUnit } from '../../../api/apiTypes';
 import { getMovies } from './../../../api/api';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+export enum MOVIE_CATEGORY {
+    POPULAR = 'popular',
+    TOP_RATED = 'top',
+    NOW_PLAYING = 'now-playing',
+    UPCOMING = 'upcoming'
+}
 
 const initialState: MovieList = {
     page: 0,
@@ -11,13 +17,39 @@ const initialState: MovieList = {
 }
 
 export const getMovieList = createAsyncThunk('movieList/getMovieList',
-    async (arg: { page?: number }, { rejectWithValue }) => {
-        try {
-            const response = await getMovies.getPopularMovies(arg.page)
-            return { ...response.data }
-        } catch (e) {
-            return rejectWithValue('something went wrong :' + e)
+    async (arg: { movieCategory: MOVIE_CATEGORY, page?: number }, { rejectWithValue }) => {
+        if (arg.movieCategory === 'popular') {
+            try {
+                const response = await getMovies.getPopularMovies(arg.page)
+                return { ...response.data }
+            } catch (e) {
+                return rejectWithValue('something went wrong :' + e)
+            }
         }
+        if (arg.movieCategory === 'top') {
+            try {
+                const response = await getMovies.getTopRatedMovies(arg.page)
+                return { ...response.data }
+            } catch (e) {
+                return rejectWithValue('something went wrong :' + e)
+            }
+        }
+        if (arg.movieCategory === 'now-playing') {
+            try {
+                const response = await getMovies.getNowPlayingMovies(arg.page)
+                return { ...response.data }
+            } catch (e) {
+                return rejectWithValue('something went wrong :' + e)
+            }
+        } else {
+            try {
+                const response = await getMovies.getUpcomingMovies(arg.page)
+                return { ...response.data }
+            } catch (e) {
+                return rejectWithValue('something went wrong :' + e)
+            }
+        }
+
     }
 )
 

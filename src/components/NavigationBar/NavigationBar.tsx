@@ -1,13 +1,16 @@
 import { useState } from "react";
 import NavItem from "../common/NavItem/NavItem";
 import SearchBar from "./SearchBar/SearchBar";
+import { getMovieList, MOVIE_CATEGORY } from "../../redux/slices/movie-list/movie-list-slice";
+import { useAppDispatch } from "../../redux/hooks";
 
 const NavigationBar = () => {
+    const dispatch = useAppDispatch()
     const movieCategory = ['Popular', 'Top Rated', 'Now Playing', 'Upcoming']
     const [activeIndex, setActiveIndex] = useState(0)
-    const onClickHandler = (index: number) => {
+    const onClickHandler = (index: number, movieCategory: MOVIE_CATEGORY) => {
         setActiveIndex(index)
-        // if (activeIndex === 0)
+        dispatch(getMovieList({ movieCategory }))
     }
 
     return (
