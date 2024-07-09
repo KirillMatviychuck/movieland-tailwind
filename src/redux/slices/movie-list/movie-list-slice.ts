@@ -13,7 +13,8 @@ const initialState: MovieList = {
     page: 0,
     movies: [],
     total_pages: 0,
-    total_movies: 0
+    total_movies: 0,
+    currentCategory: MOVIE_CATEGORY.POPULAR
 }
 
 export const getMovieList = createAsyncThunk('movieList/getMovieList',
@@ -21,7 +22,7 @@ export const getMovieList = createAsyncThunk('movieList/getMovieList',
         if (arg.movieCategory === 'popular') {
             try {
                 const response = await getMovies.getPopularMovies(arg.page)
-                return { ...response.data }
+                return { ...response.data, currentCategory: MOVIE_CATEGORY.POPULAR }
             } catch (e) {
                 return rejectWithValue('something went wrong :' + e)
             }
@@ -29,7 +30,7 @@ export const getMovieList = createAsyncThunk('movieList/getMovieList',
         if (arg.movieCategory === 'top') {
             try {
                 const response = await getMovies.getTopRatedMovies(arg.page)
-                return { ...response.data }
+                return { ...response.data, currentCategory: MOVIE_CATEGORY.TOP_RATED }
             } catch (e) {
                 return rejectWithValue('something went wrong :' + e)
             }
@@ -37,14 +38,14 @@ export const getMovieList = createAsyncThunk('movieList/getMovieList',
         if (arg.movieCategory === 'now-playing') {
             try {
                 const response = await getMovies.getNowPlayingMovies(arg.page)
-                return { ...response.data }
+                return { ...response.data, currentCategory: MOVIE_CATEGORY.NOW_PLAYING }
             } catch (e) {
                 return rejectWithValue('something went wrong :' + e)
             }
         } else {
             try {
                 const response = await getMovies.getUpcomingMovies(arg.page)
-                return { ...response.data }
+                return { ...response.data, currentCategory: MOVIE_CATEGORY.UPCOMING }
             } catch (e) {
                 return rejectWithValue('something went wrong :' + e)
             }
@@ -75,6 +76,7 @@ interface MovieList {
     movies: GetMovieUnit[],
     total_pages: number,
     total_movies: number
+    currentCategory: MOVIE_CATEGORY
 }
 
 export default movieListSlice.reducer;
